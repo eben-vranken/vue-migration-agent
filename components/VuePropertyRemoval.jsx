@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 
 const VuePropertyRemoval = () => {
 
-    const propertyDecoratorRemoval = new Interface("You are an experienced developer tasked with migrating Vue.js code from vue-property-decorator to the native Vue options API. Your objective is to convert Vue component code using decorators like @Prop, @Watch, and @Emit into code utilizing standard Vue options such as props, watch, and methods. The goal is to align the codebase with Vue's recommended practices and reduce third-party library dependencies. Migrate all Vue 2 code, ensuring functionality remains intact, without specific coding standards. Please provide the migrated code output directly without additional commentary.")
+    const propertyDecoratorRemoval = new Interface("You are an experienced developer tasked with migrating Vue.js code from vue-property-decorator to the native Vue options API. Your objective is to convert Vue component code that uses decorators like @Prop, @Watch, and @Emit into code utilizing standard Vue options such as props, watch, and methods without making any code refactoring changes. The goal is to align the codebase with Vue's recommended practices and reduce third-party library dependencies. Migrate all Vue 2 code, ensuring functionality remains intact, without specific coding standards. Please provide the migrated code output directly using defineComponent without any additional commentary or code refactoring.")
+
     const [loading, setLoading] = useState(false)
     const [timer, setTimer] = useState(0)
     const agent = useAgent;
@@ -22,6 +23,7 @@ const VuePropertyRemoval = () => {
             // Remove loading & timer
             setLoading(false)
 
+            console.log(response)
 
             const outputCode = document.getElementById("output-code");
             if (outputCode) {
@@ -35,8 +37,6 @@ const VuePropertyRemoval = () => {
                 setLoading(false)
                 setTimer(false)
             });
-
-
     }
     // Timer logic
     useEffect(() => {
@@ -76,24 +76,16 @@ const VuePropertyRemoval = () => {
             </section>
 
             {/* Output code: */}
-            <section className="[&>input]:h-full gap-2 [&>textarea]:border [&>textarea]:border-slate-200/25 [&>textarea]:rounded-md flex-1 flex flex-col p-2">
+            <section className="relative [&>input]:h-full gap-2 [&>textarea]:border [&>textarea]:border-slate-200/25 [&>textarea]:rounded-md flex-1 flex flex-col p-2">
                 <section className="w-full flex justify-between">
                     <label htmlFor="vue-property-after">Output code:</label>
                     {/* Timer */}
                     {loading && <span className="opacity-50 font-bold">{timer.toFixed(2)}s</span>}
                 </section>
-                {
-                    !loading ? (<>
-                        <textarea id="output-code" name="vue-property-after" className="h-full" cols="30" readOnly></textarea>
-                    </>) : <>
-                        {/* Loading spinner */}
-                        <section className="h-full flex items-center justify-center">
-                            <section className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></section>
-                        </section>
-                    </>
-                }
+                <textarea id="output-code" name="vue-property-after" className="h-full" cols="30" readOnly></textarea>
+                {loading && <section className="absolute inset-0 h-full flex items-center justify-center"><section className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></section></section>}
             </section>
-        </section>)
+        </section >)
 }
 
 export default VuePropertyRemoval
