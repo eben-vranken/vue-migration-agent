@@ -20,18 +20,12 @@ const VuePropertyRemoval = () => {
     const [diffModal, setDiffModal] = useState(false)
     const [chatModal, setChatModal] = useState(false)
 
-
-    const [inputCode, setInputCode] = useState('')
-    const [outputCode, setOutputCode] = useState('')
-
     const agent = useAgent;
 
     const handleSubmit = () => {
-        const outputCodeValue = document.getElementById("output-code");
-        setOutputCode(outputCode.value)
-        outputCodeValue.value = ''
-        const inputCodeValue = document.getElementById("input-code").value;
-        setInputCode(inputCodeValue)
+        var outputCode = document.getElementById("output-code").value;
+        var inputCode = document.getElementById("input-code").value;
+
 
         // Set loading & timer
         setLoading(true)
@@ -88,10 +82,8 @@ const VuePropertyRemoval = () => {
     }
 
     const handleRefactor = () => {
-        const outputCodeValue = document.getElementById("output-code").value;
-        setOutputCode(outputCode)
-        const inputCodeValue = document.getElementById("input-code").value;
-        setInputCode(inputCodeValue)
+        var outputCode = document.getElementById("output-code").value;
+        var inputCode = document.getElementById("input-code").value;
 
         // Set loading & timer
         setLoading(true)
@@ -163,7 +155,7 @@ const VuePropertyRemoval = () => {
 
             {/* Modals */}
             {diffModal && <DifferenceModal closeModal={handleDifference} inputCode={inputCode} outputCode={outputCode} />}
-            {chatModal && <ChatModal closeModal={handleDifference} inputCode={inputCode} outputCode={outputCode} />}
+            {chatModal && <ChatModal closeModal={handleChat} inputCode={inputCode} outputCode={outputCode} />}
 
         </section >)
 }
