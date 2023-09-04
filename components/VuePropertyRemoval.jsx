@@ -3,6 +3,7 @@
 import { Interface } from "@/app/page"
 import useAgent from "@/hooks/useAgent";
 import { useState, useEffect } from "react";
+import DifferenceModal from "./DifferenceModal";
 
 const VuePropertyRemoval = () => {
 
@@ -15,6 +16,10 @@ const VuePropertyRemoval = () => {
     const [loading, setLoading] = useState(false)
     const [timer, setTimer] = useState(0)
     const [done, setDone] = useState(false)
+    const [diffModal, setDiffModal] = useState(false)
+
+    const [inputCode, setInputCode] = useState('')
+    const [outputCode, setOutputCode] = useState('')
 
     const agent = useAgent;
 
@@ -23,20 +28,22 @@ const VuePropertyRemoval = () => {
 
         outputCode.value = ''
 
-        const inputCode = document.getElementById("input-code").value;
+        const inputCodeValue = document.getElementById("input-code").value;
+        setInputCode(inputCodeValue);
 
         // Set loading & timer
         setLoading(true)
         setTimer(0)
         setDone(false);
 
-        agent(propertyDecoratorRemoval.refactor, inputCode).then((response) => {
+        agent(propertyDecoratorRemoval.prompt, inputCode).then((response) => {
             // Remove loading & timer
             setLoading(false)
             setDone(true);
 
             const outputCode = document.getElementById("output-code");
             outputCode.value = response;
+            setOutputCode(response);
         })
             .catch((error) => {
                 console.error(error);
@@ -106,6 +113,10 @@ const VuePropertyRemoval = () => {
             });
     }
 
+    const handleDifference = () => {
+        setDiffModal(!diffModal)
+    }
+
     return (
         // Input code:
         <section className="flex h-full bg-primary">
@@ -131,14 +142,17 @@ const VuePropertyRemoval = () => {
                 {
                     done && (
                         <section className="w-full flex gap-2">
-                            <button onClick={handleCopy} className="bg-yellow-500 py-3 rounded-md text-white font-semibold flex-[0.50_1_1%]" title="Copy">📋</button>
-                            <button onClick={handleRefactor} className="bg-red-500 py-3 rounded-md text-white font-semibold flex-[0.50_1_1%]" title="Refactor">🔧</button>
+                            <button onClick={handleCopy} className="bg-yellow-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Copy">📋</button>
+                            <button onClick={handleRefactor} className="bg-red-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Refactor">🔧</button>
+                            <button onClick={handleDifference} className="bg-green-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Refactor">🔍</button>
                         </section>
 
                     )
                 }
 
             </section>
+
+            {diffModal && <DifferenceModal closeModal={handleDifference} inputCode={inputCode} outputCode={outputCode} />}
         </section >)
 }
 
