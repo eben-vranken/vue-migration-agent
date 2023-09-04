@@ -38,7 +38,7 @@ export default function Home() {
   }, [view]);
 
   return (
-    <main className="flex w-full h-screen flex-col py-16">
+    <main className="flex w-full h-screen flex-col py-12">
       <h1 className="text-xl font-bold font-mono">Vue Migration Agent</h1>
 
       <section className="h-full flex flex-col pt-2 [&>section]:rounded-lg [&>section]:border [&>section]:border-slate-500">
