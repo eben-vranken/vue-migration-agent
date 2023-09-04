@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const VuePropertyRemoval = () => {
 
-    const propertyDecoratorRemoval = new Interface("You are an experienced developer tasked with migrating Vue.js code from vue-property-decorator to the native Vue options API. Your objective is to convert Vue component code that uses decorators like @Prop, @Watch, and @Emit into code utilizing standard Vue options such as props, watch, and methods without making any code refactoring changes. The goal is to align the codebase with Vue's recommended practices and reduce third-party library dependencies. Migrate all Vue 2 code, ensuring functionality remains intact, without specific coding standards. Please provide the migrated code output directly using defineComponent without any additional commentary or code refactoring.")
+    const propertyDecoratorRemoval = new Interface("You are an experienced developer tasked with migrating Vue.js code from vue-property-decorator to the native Vue options API without making any code refactoring changes. Your objective is to convert Vue component code that uses decorators like @Prop, @Watch, and @Emit into code utilizing standard Vue options such as props, watch, and methods while keeping the existing code structure intact. The goal is to align the codebase with Vue's recommended practices and reduce third-party library dependencies. Migrate all Vue 2 code, ensuring functionality remains intact, without specific coding standards. Please provide the migrated code output directly using defineComponent without any additional commentary or code refactoring.")
 
     const [loading, setLoading] = useState(false)
     const [timer, setTimer] = useState(0)
