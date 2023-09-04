@@ -11,7 +11,7 @@ const useAgent = async (prompt, inputCode) => {
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [{ role: "system", content: prompt }, { role: "user", content: inputCode }],
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
     })
 
 

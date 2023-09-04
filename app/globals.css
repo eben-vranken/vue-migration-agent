@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 textarea,
 textarea:focus {
     font-size: 14px;
@@ -20,4 +21,12 @@ textarea:focus {
     -ms-box-shadow: none;
     -o-box-shadow: none;
     box-shadow: none;
+}
+
+button {
+    transition: 250ms
+}
+
+button:hover {
+    opacity: 75%;
 }
