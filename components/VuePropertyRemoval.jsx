@@ -125,7 +125,7 @@ const VuePropertyRemoval = () => {
                     {/* Timer */}
                     {(loading || done) && <span className="opacity-50 font-bold">{timer.toFixed(2)}s</span>}
                 </section>
-                <textarea id="output-code" name="vue-property-after" className="h-full" cols="30" readOnly></textarea>
+                <textarea id="output-code" name="vue-property-after" className="h-full" cols="30"></textarea>
                 {loading && <section className="absolute inset-0 h-full flex items-center justify-center"><section className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></section></section>}
 
                 {
