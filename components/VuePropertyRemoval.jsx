@@ -4,6 +4,7 @@ import { Interface } from "@/app/page"
 import useAgent from "@/hooks/useAgent";
 import { useState, useEffect } from "react";
 import DifferenceModal from "./DifferenceModal";
+import ChatModal from "./ChatModal";
 
 const VuePropertyRemoval = () => {
 
@@ -17,6 +18,8 @@ const VuePropertyRemoval = () => {
     const [timer, setTimer] = useState(0)
     const [done, setDone] = useState(false)
     const [diffModal, setDiffModal] = useState(false)
+    const [chatModal, setChatModal] = useState(false)
+
 
     const [inputCode, setInputCode] = useState('')
     const [outputCode, setOutputCode] = useState('')
@@ -24,12 +27,11 @@ const VuePropertyRemoval = () => {
     const agent = useAgent;
 
     const handleSubmit = () => {
-        const outputCode = document.getElementById("output-code");
-
-        outputCode.value = ''
-
+        const outputCodeValue = document.getElementById("output-code");
+        setOutputCode(outputCode.value)
+        outputCodeValue.value = ''
         const inputCodeValue = document.getElementById("input-code").value;
-        setInputCode(inputCodeValue);
+        setInputCode(inputCodeValue)
 
         // Set loading & timer
         setLoading(true)
@@ -86,9 +88,10 @@ const VuePropertyRemoval = () => {
     }
 
     const handleRefactor = () => {
-        const outputCode = document.getElementById("output-code").value;
-
-        const inputCode = document.getElementById("input-code").value;
+        const outputCodeValue = document.getElementById("output-code").value;
+        setOutputCode(outputCode)
+        const inputCodeValue = document.getElementById("input-code").value;
+        setInputCode(inputCodeValue)
 
         // Set loading & timer
         setLoading(true)
@@ -117,6 +120,10 @@ const VuePropertyRemoval = () => {
         setDiffModal(!diffModal)
     }
 
+    const handleChat = () => {
+        setChatModal(!chatModal)
+    }
+
     return (
         // Input code:
         <section className="flex h-full bg-primary">
@@ -142,9 +149,10 @@ const VuePropertyRemoval = () => {
                 {
                     done && (
                         <section className="w-full flex gap-2">
-                            <button onClick={handleCopy} className="bg-yellow-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Copy">📋</button>
-                            <button onClick={handleRefactor} className="bg-red-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Refactor">🔧</button>
-                            <button onClick={handleDifference} className="bg-green-500 py-3 rounded-md text-white font-semibold flex-[0.33_1_1%]" title="Refactor">🔍</button>
+                            <button onClick={handleCopy} className="bg-yellow-500 py-3 rounded-md text-white font-semibold flex-[0.25_1_1%]" title="Copy">📋</button>
+                            <button onClick={handleRefactor} className="bg-red-500 py-3 rounded-md text-white font-semibold flex-[0.25_1_1%]" title="Refactor">🔧</button>
+                            <button onClick={handleDifference} className="bg-green-500 py-3 rounded-md text-white font-semibold flex-[0.25_1_1%]" title="Refactor">🔍</button>
+                            <button onClick={handleChat} className="bg-blue-600 py-3 rounded-md text-white font-semibold flex-[0.25_1_1%]" title="Chat">🗯</button>
                         </section>
 
                     )
@@ -152,7 +160,11 @@ const VuePropertyRemoval = () => {
 
             </section>
 
+
+            {/* Modals */}
             {diffModal && <DifferenceModal closeModal={handleDifference} inputCode={inputCode} outputCode={outputCode} />}
+            {chatModal && <ChatModal closeModal={handleDifference} inputCode={inputCode} outputCode={outputCode} />}
+
         </section >)
 }
 
